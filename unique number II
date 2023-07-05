@@ -1,0 +1,43 @@
+// find 2 unique number in an array using bit wise
+// other approch can be using map in c++ stl
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    int res=0;
+    for(int i=0;i<n;i++)
+    {
+        res=res^arr[i];
+    }
+    int pos=0;
+    int temp=res;
+    while((temp&1)!=1)
+    {
+        pos++;
+        temp=temp>>1;
+    }
+    cout<<"position is"<<pos<<endl;
+    int mask=(1<<pos);
+    cout<<"value of mask"<<mask<<endl;
+    int x=0,y=0;
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]&mask>0)
+        {
+            x=x^arr[i];
+        }
+    }
+    cout<<x<<endl;
+    y=res^x;
+    cout<<y<<endl;
+    return 0;
+}
